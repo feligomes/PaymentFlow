@@ -2,13 +2,18 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 import Image from "next/image";
-import Button from "./components/Button";
-import Label from "./components/Label";
-import SectionTitle from "./components/SectionTitle";
+import Button from "../components/Button";
+import Label from "../components/Label";
+import SectionTitle from "../components/SectionTitle";
+import { PaymentFormData } from "../interfaces/types";
 
 const ReviewPage = () => {
   const router = useRouter();
+  const formData = useSelector((state: { form: { data: PaymentFormData } }) => state.form.data);
+
+  console.log("formData", formData)
 
   const handleEdit = () => {
     router.push("/payment");
@@ -19,10 +24,7 @@ const ReviewPage = () => {
   };
 
   return (
-    <div
-      className="flex items-center justify-center"
-      style={{ height: "100%" }}
-    >
+    <div className="flex items-center justify-center" style={{ height: "100%" }}>
       <div
         style={{
           width: 576,
@@ -44,12 +46,8 @@ const ReviewPage = () => {
               justifyContent: "space-between",
             }}
           >
-            <SectionTitle
-              step={1}
-              title="Payment information"
-              isCompleted={true}
-            />
-            <Button onClick={() => handlePay()} label="Edit" link={true} />
+            <SectionTitle step={1} title="Payment information" isCompleted={true} />
+            <Button onClick={() => handleEdit()} label="Edit" link={true} />
           </div>
         </div>
 
@@ -84,7 +82,7 @@ const ReviewPage = () => {
             }}
           >
             <Image src="/VisaLogo.svg" alt="VisaLogo" width={24} height={17} />
-            <span>Card ending in xxxx4242</span>
+            <span>Card ending in ••••{formData?.cardNumber?.slice(-4)}</span>
           </div>
           <div style={{ marginTop: "48px" }}>
             <Button onClick={() => handlePay()} label="Pay $600.00" />

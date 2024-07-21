@@ -81,7 +81,6 @@ const HomePage = () => {
             >
               Total due
             </h2>
-            {/* TODO Make reusable component  */}
             <span
               style={{
                 fontFamily: "Georgia",
