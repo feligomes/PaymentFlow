@@ -15,52 +15,37 @@ const ReviewPage = () => {
   const dispatch = useAppDispatch();
   const { formData } = useAppSelector((state) => state.form);
 
-  console.log("formData", formData)
-
   const handleEdit = () => {
     router.push("/payment");
   };
 
   const handlePay = () => {
-    dispatch(cleanFormData());
     router.push("/success");
+    dispatch(cleanFormData());
   };
 
   return (
-    <div className="flex items-center justify-center" style={{ height: "100%" }}>
+    <div className="flex justify-center items-center sm:h-full h-auto sm:items-center">
       <div
-        style={{
-          width: 576,
-          backgroundColor: "white",
-          borderRadius: "16px",
-        }}
+        className="w-full max-w-xl bg-white sm:py-4 border-b sm:border-0 sm:rounded-2xl"
       >
         <div
+          className="py-5 px-8 sm:px-12"
           style={{
             borderBottom: "1px solid #E7E9EF",
-            padding: "20px 48px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <SectionTitle step={1} title="Payment information" isCompleted={true} />
-            <Button onClick={() => handleEdit()} label="Edit" link={true} />
+          <div className="flex flex-row items-center justify-between">
+            <SectionTitle
+              step={1}
+              title="Payment information"
+              isCompleted={true}
+            />
+            <Button onClick={handleEdit} label="Edit" link={true} />
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "20px 48px 36px",
-          }}
-        >
+        <div className="flex flex-col py-5 px-8 sm:px-12">
           <SectionTitle step={2} title="Review and pay" />
           <span
             style={{
@@ -87,8 +72,8 @@ const ReviewPage = () => {
             <Image src="/VisaLogo.svg" alt="VisaLogo" width={24} height={17} />
             <span>Card ending in ••••{formData?.cardNumber?.slice(-4)}</span>
           </div>
-          <div style={{ marginTop: "48px" }}>
-            <Button onClick={() => handlePay()} label="Pay $600.00" />
+          <div style={{ marginTop: "48px", marginBottom: "16px" }}>
+            <Button onClick={handlePay} label="Pay $600.00" />
           </div>
         </div>
       </div>

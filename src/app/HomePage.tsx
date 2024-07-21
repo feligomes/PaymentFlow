@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Button from "./components/Button";
 import Title from "./components/Title";
+import { HEADER_HEIGHT } from "./constants/layout";
 
 const HomePage = () => {
   const router = useRouter();
@@ -13,44 +14,46 @@ const HomePage = () => {
   };
 
   return (
-    <div>
-      <div>
-        <div
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+      }}
+    >
+      <div
+        style={{
+          flexShrink: 0,
+          padding : "96px 16px 48px 16px",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "16px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Title text={"Hi, Taylor"} />
+        <span
           style={{
-            display: "flex",
-            flexDirection: "column",
-            paddingTop: 96,
-            paddingBottom: 48,
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "16px",
+            maxWidth: 376,
+            fontFamily: "Arial",
+            fontWeight: "400",
+            textAlign: "center",
+            fontSize: "16px",
           }}
         >
-          <Title text={"Hi, Taylor"} />
-          <span
-            style={{
-              width: 376,
-              fontFamily: "Arial",
-              fontWeight: "400",
-              textAlign: "center",
-              fontSize: "16px",
-            }}
-          >
-            You have 6 medical bills ready from ABC Health System. You can pay
-            your bills here or verify your identity to view full bill details.
-          </span>
-        </div>
+          You have 6 medical bills ready from ABC Health System. You can pay
+          your bills here or verify your identity to view full bill details.
+        </span>
       </div>
       <div
         style={{
-          //TODO change this to make it full height of rest of page
-          height: "58%",
+          flexGrow: 1,
           backgroundColor: "white",
           borderRadius: "32px 32px 0px 0px",
           padding: "32px",
-          position: "fixed",
-          bottom: "0px",
-          width: "100%",
+          display: "flex",
+          justifyContent: "center",
         }}
       >
         <div
@@ -59,7 +62,6 @@ const HomePage = () => {
             flexDirection: "column",
             gap: "24px",
             width: 376,
-            margin: "auto",
           }}
         >
           <div

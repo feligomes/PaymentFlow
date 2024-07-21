@@ -6,7 +6,7 @@ import Image from "next/image";
 interface FormFieldProps {
   label: string;
   type?: string;
-  width?: number;
+  maxWidth?: number;
   register: UseFormRegisterReturn;
   error?: { message?: string };
   maxLength?: number;
@@ -16,7 +16,7 @@ interface FormFieldProps {
 const FormField: React.FC<FormFieldProps> = ({
   label,
   type = "text",
-  width,
+  maxWidth,
   register,
   error,
   maxLength,
@@ -28,11 +28,11 @@ const FormField: React.FC<FormFieldProps> = ({
         display: "flex",
         flexDirection: "column",
         gap: "8px",
-        width: width || "100%",
+        maxWidth: maxWidth || "100%",
       }}
     >
       <Label text={label} />
-      <div style={{ position: "relative", width: width || "100%" }}>
+      <div style={{ position: "relative", maxWidth: maxWidth || "100%" }}>
         <input
           type={type}
           {...register}
@@ -53,8 +53,7 @@ const FormField: React.FC<FormFieldProps> = ({
               top: "12px",
             }}
           >
-            {/* TODO update icon */}
-            <Image src="/tick-icon.svg" alt="Valid" width={24} height={24} />
+            <Image src="/Check.svg" alt="Valid" width={24} height={24} />
           </div>
         )}
         {error && (
@@ -65,8 +64,7 @@ const FormField: React.FC<FormFieldProps> = ({
               top: "12px",
             }}
           >
-            {/* TODO update icon */}
-            <Image src="/VisaLogo.svg" alt="Error" width={24} height={24} />
+            <Image src="/AlertCircle.svg" alt="Error" width={24} height={24} />
           </div>
         )}
       </div>

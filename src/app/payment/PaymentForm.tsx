@@ -16,21 +16,28 @@ const PaymentForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const { formData } = useAppSelector((state) => state.form);
 
-  const { register, handleSubmit, setValue, watch, formState: { errors, isValid } } = useForm<PaymentFormData>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<PaymentFormData>({
     defaultValues: formData,
-    mode: 'onChange', 
   });
 
   useEffect(() => {
     if (formData) {
       Object.keys(formData).forEach((key) => {
-        setValue(key as keyof PaymentFormData, formData[key as keyof PaymentFormData]);
+        setValue(
+          key as keyof PaymentFormData,
+          formData[key as keyof PaymentFormData]
+        );
       });
     }
   }, [formData, setValue]);
 
   const onSubmit: SubmitHandler<PaymentFormData> = (data) => {
-    console.log("data", data)
     dispatch(saveFormData(data));
     router.push("/review");
   };
@@ -41,19 +48,19 @@ const PaymentForm: React.FC = () => {
   const name = watch("name");
   const zip = watch("zip");
 
+  const isCardNumberValid = /^[0-9]{16}$/.test(cardNumber);
+  const isExpiryValid = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry);
+  const isCvvValid = /^[0-9]{3}$/.test(cvv);
+  const isNameValid = name.trim().length > 0;
+  const isZipValid = /^[0-9]+$/.test(zip);
+
   return (
-    <div className="flex items-center justify-center" style={{ height: "100%" }}>
-      <div
-        style={{
-          width: 576,
-          backgroundColor: "white",
-          borderRadius: "16px",
-        }}
-      >
+    <div className="flex justify-center items-center sm:h-full h-auto sm:items-center">
+      <div className="w-full max-w-xl bg-white sm:py-4 border-b sm:border-0 sm:rounded-2xl">
         <div
+          className="py-5 px-8 sm:px-12"
           style={{
             borderBottom: "1px solid #E7E9EF",
-            padding: "36px 48px 32px 48px",
           }}
         >
           <SectionTitle step={1} title="Payment information" />
@@ -78,12 +85,12 @@ const PaymentForm: React.FC = () => {
                 },
               })}
               error={errors.cardNumber}
-              isValid={!!cardNumber && !errors.cardNumber}
+              isValid={isCardNumberValid}
             />
             <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
               <FormField
                 label="Expires (MM/YY)"
-                width={232}
+                maxWidth={232}
                 maxLength={5}
                 register={register("expiry", {
                   required: "This field is required",
@@ -93,12 +100,12 @@ const PaymentForm: React.FC = () => {
                   },
                 })}
                 error={errors.expiry}
-                isValid={!!expiry && !errors.expiry}
+                isValid={isExpiryValid}
               />
               <FormField
                 label="Security code (CVV)"
                 type="tel"
-                width={232}
+                maxWidth={232}
                 maxLength={3}
                 register={register("cvv", {
                   required: "This field is required",
@@ -108,7 +115,7 @@ const PaymentForm: React.FC = () => {
                   },
                 })}
                 error={errors.cvv}
-                isValid={!!cvv && !errors.cvv}
+                isValid={isCvvValid}
               />
             </div>
             <FormField
@@ -118,7 +125,7 @@ const PaymentForm: React.FC = () => {
               })}
               maxLength={20}
               error={errors.name}
-              isValid={!!name && !errors.name}
+              isValid={isNameValid}
             />
             <FormField
               label="ZIP code"
@@ -126,12 +133,12 @@ const PaymentForm: React.FC = () => {
               register={register("zip", {
                 required: "This field is required",
                 pattern: {
-                  value: /^[0-9]*$/,
+                  value: /^[0-9]+$/,
                   message: "ZIP code must be a number",
                 },
               })}
               error={errors.zip}
-              isValid={!!zip && !errors.zip}
+              isValid={isZipValid}
             />
             <div style={{ marginTop: "8px" }}>
               <Button label="Continue" />

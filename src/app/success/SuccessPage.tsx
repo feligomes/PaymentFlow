@@ -13,6 +13,9 @@ const SuccessPage = () => {
       <div
         style={{
           marginTop: "96px",
+          padding : "16px",
+          textAlign : "center",
+          maxWidth : 343
         }}
       >
         <Title text={"Thank you for your payment!"} />
