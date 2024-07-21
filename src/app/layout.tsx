@@ -17,11 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <title>Payment Flow App</title>
-      <meta
-        name="description"
-        content="Demo application showing a payment flow with Next.js"
-      />
+      <head>
+        <title>Payment Flow App</title>
+        <meta
+          name="description"
+          content="Demo application showing a payment flow with Next.js"
+        />
+      </head>
       <body className={`${inter.className}`}>
         <Provider store={store}>
           <header

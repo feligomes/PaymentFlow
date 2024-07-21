@@ -72,6 +72,7 @@ const PaymentForm: React.FC = () => {
               flexDirection: "column",
               gap: "16px",
             }}
+            aria-label="Payment Information Form"
           >
             <FormField
               label="Card number"
@@ -141,7 +142,10 @@ const PaymentForm: React.FC = () => {
               isValid={isZipValid}
             />
             <div style={{ marginTop: "8px" }}>
-              <Button label="Continue" />
+              <Button
+                label="Continue"
+                ariaLabel="Proceed to the review step"
+              />
             </div>
           </form>
         </div>

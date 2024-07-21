@@ -21,10 +21,10 @@ const HomePage = () => {
         height: `calc(100vh - ${HEADER_HEIGHT}px)`,
       }}
     >
-      <div
+      <section
         style={{
           flexShrink: 0,
-          padding : "96px 16px 48px 16px",
+          padding: "96px 16px 48px 16px",
           alignItems: "center",
           justifyContent: "center",
           gap: "16px",
@@ -33,7 +33,7 @@ const HomePage = () => {
         }}
       >
         <Title text={"Hi, Taylor"} />
-        <span
+        <p
           style={{
             maxWidth: 376,
             fontFamily: "Arial",
@@ -44,9 +44,9 @@ const HomePage = () => {
         >
           You have 6 medical bills ready from ABC Health System. You can pay
           your bills here or verify your identity to view full bill details.
-        </span>
-      </div>
-      <div
+        </p>
+      </section>
+      <section
         style={{
           flexGrow: 1,
           backgroundColor: "white",
@@ -90,13 +90,14 @@ const HomePage = () => {
                 fontWeight: "700",
                 color: "#13126C",
               }}
+              aria-labelledby="total-due"
             >
               $600.00
             </span>
           </div>
-          <Button onClick={() => handlePayTotal()} label="Pay total" />
+          <Button onClick={handlePayTotal} label="Pay total" ariaLabel="Pay total amount of $600.00" />
         </div>
-      </div>
+      </section>
     </div>
   );
 };

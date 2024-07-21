@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Settlement Simulation App
 
-First, run the development server:
+This is a small app that simulates a payment flow for a company. Built as a showcase of different technologies and based on a technical challenge.
 
+## Deployment
+
+The app is deployed on Vercel and can be tested at this URL: [Settlement System](https://settlersystem.vercel.app/)
+
+## Running Locally
+
+To run the application locally, follow these steps:
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## Running Tests
+
+The application comes with tests that can be run using:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Notable Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Using Latest Standards**: Using Next.js and React latest versions. Making use of the new App Router routing. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Responsive Design**: Responsive designs were applied and the app works in all different screen sizes.
 
-## Learn More
+- **High Test Coverage**: The App has test for every single page and considering multiple flow scenarios. In a real case scenario more depth into all the possible flow roads could had been added.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Important Considerations
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Technologies Used**: Some of the technologies used for the challenge were Next.js, Typesript, Redux, Jest, Tailwind and Vercel for deploy. 
 
-## Deploy on Vercel
+- **Mocked Endpoints**: This app was built as a showcase of frontend and for that reason the actual calls to the endpoints that would happen to fetch the user info and do the payment are currently mocked.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Designs**: Figma designs provided with the challenge were used, some of the ones of Desktop were missing so mobile was used as a reference. 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Data Storage**: The app uses Redux for data storage, meaning that when there is a reload, everything starts fresh. In a real scenario, this could be linked to a database or API to get the last added info, or a stored info from the user. The same cleaning of the Redux state happens when the user completes the flow as a way to reset it
+
+- **Header Routing**: The logo in the header can be used as a redirect to the login screen and its useful for testing the flow.
+
+- **Timeframe**: The challenge was meant to be completed within 4 hours, so the number of features was limited.
+
+
+## Future Improvements
+
+- **Better Inputs**: With more time more format could have been added for some specific inputs such as the Expire Date (automatic / separator) and the Credit Card Number (split in sections of 4). Also validation for "valid dates" could have added to the date. Finally others inputs such as the zip code could have been linked to an API to check if they are valid ones. 
+
+- **UI Kit**: I did separate many of the UI components to make them reusable in a real case scenario this would have probably been part of a separate UI Kit with its own storybook and behaviours as a way to improve future development. 
+
+- **Login System**: Add a login for the different parties and show a different UI based on the logged-in users. Each user would see the corresponding amount they need to pay
+
+- **Persistent Data**: Make the data persistent using a database and a small API.
+
+- **Components Refactor**: There is a lot of room for improvements in the components, with more time I would have tried something more modular and reusable.
+
+
+

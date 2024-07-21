@@ -14,6 +14,9 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
   isCompleted = false,
 }) => (
   <div
+    role="heading"
+    aria-level={2}
+    aria-current={isInactive ? "false" : "true"}
     style={{
       display: "flex",
       flexDirection: "row",
@@ -35,6 +38,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
       }}
     >
       <span
+        aria-hidden="true"
         style={{
           fontFamily: "Arial",
           fontSize: "16px",
@@ -46,6 +50,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
       </span>
     </div>
     <h2
+      tabIndex={0}
       style={{
         fontFamily: "Arial",
         fontSize: "20px",

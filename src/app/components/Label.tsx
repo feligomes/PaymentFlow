@@ -1,12 +1,16 @@
 import React from "react";
 
 interface LabelProps {
-  text: string,
-  error? :boolean
+  text: string;
+  htmlFor?: string;
+  error?: boolean;
+  id?: string;
 }
 
-const Label: React.FC<LabelProps> = ({ text, error }) => (
+const Label: React.FC<LabelProps> = ({ text, htmlFor, error, id }) => (
   <label
+    htmlFor={htmlFor}
+    id={id}
     style={{
       fontFamily: "Arial",
       fontSize: "14px",
@@ -20,5 +24,3 @@ const Label: React.FC<LabelProps> = ({ text, error }) => (
 );
 
 export default Label;
-
-

@@ -4,11 +4,13 @@ interface ButtonProps {
   label: string;
   onClick?: () => void;
   link?: boolean;
+  ariaLabel?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, link = false }) => (
+const Button: React.FC<ButtonProps> = ({ label, onClick, link = false, ariaLabel }) => (
   <button
     onClick={onClick}
+    aria-label={ariaLabel || label}
     style={{
       backgroundColor: link ? "white" : "#3667E9",
       color: link ? "#3667E9" : "white",

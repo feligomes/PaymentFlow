@@ -10,7 +10,7 @@ interface FormFieldProps {
   register: UseFormRegisterReturn;
   error?: { message?: string };
   maxLength?: number;
-  isValid: boolean; // New prop to indicate if the field is valid
+  isValid: boolean;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -22,6 +22,9 @@ const FormField: React.FC<FormFieldProps> = ({
   maxLength,
   isValid,
 }) => {
+  const inputId = label.replace(/\s+/g, '-').toLowerCase();  
+  const errorId = `${inputId}-error`;
+
   return (
     <div
       style={{
@@ -31,12 +34,15 @@ const FormField: React.FC<FormFieldProps> = ({
         maxWidth: maxWidth || "100%",
       }}
     >
-      <Label text={label} />
+      <Label text={label} htmlFor={inputId} />
       <div style={{ position: "relative", maxWidth: maxWidth || "100%" }}>
         <input
+          id={inputId}
           type={type}
           {...register}
           maxLength={maxLength}
+          aria-invalid={error ? "true" : "false"}
+          aria-describedby={error ? errorId : undefined}
           style={{
             height: 48,
             border: `1px solid ${error ? "#C34648" : "#6D7088"}`,
@@ -68,7 +74,7 @@ const FormField: React.FC<FormFieldProps> = ({
           </div>
         )}
       </div>
-      {error && <Label text={error.message || ""} error={true} />}
+      {error && <Label text={error.message || ""} id={errorId} error={true} />}
     </div>
   );
 };

@@ -41,13 +41,18 @@ const ReviewPage = () => {
               title="Payment information"
               isCompleted={true}
             />
-            <Button onClick={handleEdit} label="Edit" link={true} />
+            <Button
+              onClick={handleEdit}
+              label="Edit"
+              link={true}
+              ariaLabel="Edit payment information"
+            />
           </div>
         </div>
 
         <div className="flex flex-col py-5 px-8 sm:px-12">
           <SectionTitle step={2} title="Review and pay" />
-          <span
+          <p
             style={{
               marginTop: "20px",
               marginBottom: "29px",
@@ -58,7 +63,7 @@ const ReviewPage = () => {
             }}
           >
             You’re about to make a payment of <b>$600.00</b>
-          </span>
+          </p>
           <Label text={"Payment method"} />
           <div
             style={{
@@ -69,11 +74,15 @@ const ReviewPage = () => {
               marginTop: "4px",
             }}
           >
-            <Image src="/VisaLogo.svg" alt="VisaLogo" width={24} height={17} />
+            <Image src="/VisaLogo.svg" alt="Visa logo" width={24} height={17} />
             <span>Card ending in ••••{formData?.cardNumber?.slice(-4)}</span>
           </div>
           <div style={{ marginTop: "48px", marginBottom: "16px" }}>
-            <Button onClick={handlePay} label="Pay $600.00" />
+            <Button
+              onClick={handlePay}
+              label="Pay $600.00"
+              ariaLabel="Proceed to payment and complete transaction"
+            />
           </div>
         </div>
       </div>
