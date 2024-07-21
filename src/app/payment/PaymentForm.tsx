@@ -1,28 +1,27 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
 import { saveFormData } from "../store/formSlice";
 import Button from "../components/Button";
 import SectionTitle from "../components/SectionTitle";
 import FormField from "../components/FormField";
 import { PaymentFormData } from "../interfaces/types";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 const PaymentForm: React.FC = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const formData = useSelector((state: { form: { data: PaymentFormData } }) => state.form.data);
+  const dispatch = useAppDispatch();
+  const { formData } = useAppSelector((state) => state.form);
 
-  console.log("formData", formData)
-
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<PaymentFormData>({
+  const { register, handleSubmit, setValue, watch, formState: { errors, isValid } } = useForm<PaymentFormData>({
     defaultValues: formData,
+    mode: 'onChange', 
   });
 
   useEffect(() => {
-    // Pre-fill form fields with saved data if it exists
     if (formData) {
       Object.keys(formData).forEach((key) => {
         setValue(key as keyof PaymentFormData, formData[key as keyof PaymentFormData]);
@@ -35,6 +34,12 @@ const PaymentForm: React.FC = () => {
     dispatch(saveFormData(data));
     router.push("/review");
   };
+
+  const cardNumber = watch("cardNumber");
+  const expiry = watch("expiry");
+  const cvv = watch("cvv");
+  const name = watch("name");
+  const zip = watch("zip");
 
   return (
     <div className="flex items-center justify-center" style={{ height: "100%" }}>
@@ -73,11 +78,13 @@ const PaymentForm: React.FC = () => {
                 },
               })}
               error={errors.cardNumber}
+              isValid={!!cardNumber && !errors.cardNumber}
             />
             <div style={{ display: "flex", flexDirection: "row", gap: "16px" }}>
               <FormField
                 label="Expires (MM/YY)"
                 width={232}
+                maxLength={5}
                 register={register("expiry", {
                   required: "This field is required",
                   pattern: {
@@ -86,6 +93,7 @@ const PaymentForm: React.FC = () => {
                   },
                 })}
                 error={errors.expiry}
+                isValid={!!expiry && !errors.expiry}
               />
               <FormField
                 label="Security code (CVV)"
@@ -100,6 +108,7 @@ const PaymentForm: React.FC = () => {
                   },
                 })}
                 error={errors.cvv}
+                isValid={!!cvv && !errors.cvv}
               />
             </div>
             <FormField
@@ -107,7 +116,9 @@ const PaymentForm: React.FC = () => {
               register={register("name", {
                 required: "This field is required",
               })}
+              maxLength={20}
               error={errors.name}
+              isValid={!!name && !errors.name}
             />
             <FormField
               label="ZIP code"
@@ -120,6 +131,7 @@ const PaymentForm: React.FC = () => {
                 },
               })}
               error={errors.zip}
+              isValid={!!zip && !errors.zip}
             />
             <div style={{ marginTop: "8px" }}>
               <Button label="Continue" />

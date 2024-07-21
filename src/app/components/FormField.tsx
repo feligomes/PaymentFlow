@@ -10,6 +10,7 @@ interface FormFieldProps {
   register: UseFormRegisterReturn;
   error?: { message?: string };
   maxLength?: number;
+  isValid: boolean; // New prop to indicate if the field is valid
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -19,13 +20,8 @@ const FormField: React.FC<FormFieldProps> = ({
   register,
   error,
   maxLength,
+  isValid,
 }) => {
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (maxLength && e.target.value.length > maxLength) {
-      e.target.value = e.target.value.slice(0, maxLength);
-    }
-  };
-
   return (
     <div
       style={{
@@ -40,6 +36,7 @@ const FormField: React.FC<FormFieldProps> = ({
         <input
           type={type}
           {...register}
+          maxLength={maxLength}
           style={{
             height: 48,
             border: `1px solid ${error ? "#C34648" : "#6D7088"}`,
@@ -47,8 +44,19 @@ const FormField: React.FC<FormFieldProps> = ({
             borderRadius: "8px",
             width: "100%",
           }}
-          onInput={handleInput}
         />
+        {isValid && !error && (
+          <div
+            style={{
+              position: "absolute",
+              right: "16px",
+              top: "12px",
+            }}
+          >
+            {/* TODO update icon */}
+            <Image src="/tick-icon.svg" alt="Valid" width={24} height={24} />
+          </div>
+        )}
         {error && (
           <div
             style={{
@@ -57,7 +65,8 @@ const FormField: React.FC<FormFieldProps> = ({
               top: "12px",
             }}
           >
-            <Image src="/VisaLogo.svg" alt="ErrorLogo" width={24} height={24} />
+            {/* TODO update icon */}
+            <Image src="/VisaLogo.svg" alt="Error" width={24} height={24} />
           </div>
         )}
       </div>

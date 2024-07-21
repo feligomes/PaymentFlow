@@ -2,16 +2,18 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
 import Image from "next/image";
 import Button from "../components/Button";
 import Label from "../components/Label";
 import SectionTitle from "../components/SectionTitle";
-import { PaymentFormData } from "../interfaces/types";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { cleanFormData } from "../store/formSlice";
 
 const ReviewPage = () => {
   const router = useRouter();
-  const formData = useSelector((state: { form: { data: PaymentFormData } }) => state.form.data);
+  const dispatch = useAppDispatch();
+  const { formData } = useAppSelector((state) => state.form);
 
   console.log("formData", formData)
 
@@ -20,6 +22,7 @@ const ReviewPage = () => {
   };
 
   const handlePay = () => {
+    dispatch(cleanFormData());
     router.push("/success");
   };
 

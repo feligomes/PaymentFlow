@@ -5,7 +5,7 @@ import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Provider } from "react-redux";
-import store from "./store/store";
+import { store } from "./store";
 
 const inter = Inter({ subsets: ["latin"] });
 const HEADER_HEIGHT = 81;
@@ -17,6 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <title>Payment Flow App</title>
+      <meta
+        name="description"
+        content="Demo application showing a payment flow with Next.js"
+      />
       <body className={`${inter.className}`}>
         <Provider store={store}>
           <header
