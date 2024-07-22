@@ -7,7 +7,12 @@ interface ButtonProps {
   ariaLabel?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, link = false, ariaLabel }) => (
+const Button: React.FC<ButtonProps> = ({
+  label,
+  onClick,
+  link = false,
+  ariaLabel,
+}) => (
   <button
     onClick={onClick}
     aria-label={ariaLabel || label}

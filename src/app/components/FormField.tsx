@@ -22,7 +22,7 @@ const FormField: React.FC<FormFieldProps> = ({
   maxLength,
   isValid,
 }) => {
-  const inputId = label.replace(/\s+/g, '-').toLowerCase();  
+  const inputId = label.replace(/\s+/g, "-").toLowerCase();
   const errorId = `${inputId}-error`;
 
   return (

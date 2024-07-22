@@ -1,11 +1,11 @@
 
-# Settlement Simulation App
+# Payment Flow App
 
 This is a small app that simulates a payment flow for a company. Built as a showcase of different technologies and based on a technical challenge.
 
 ## Deployment
 
-The app is deployed on Vercel and can be tested at this URL: [Settlement System](https://settlersystem.vercel.app/)
+The app is deployed on Vercel and can be tested at this URL: [Payment Flow](https://paymentsflow.vercel.app/)
 
 ## Running Locally
 
@@ -31,6 +31,8 @@ npm run test
 ```
 
 ## Notable Features
+
+- **100 Lighthouse Score**: The app scores a 100 in all metrics meassured in Lighthouse.
 
 - **Using Latest Standards**: Using Next.js and React latest versions. Making use of the new App Router routing. 
 
